@@ -28,7 +28,7 @@ def solution(s):
         c2 = 0
         
     answer = len(a)
-    return answer+
+    return answer
 
 
 
