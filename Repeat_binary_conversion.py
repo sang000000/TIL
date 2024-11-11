@@ -1,16 +1,4 @@
-def solution(s):
-    answer = []
-    Round = 0
-    zero_count = 0
-    a = 0
-    while a != "1":
-        Round += 1
-        zero_count += s.count("0")
-        a = s.replace("0", "")
-        b = bin(len(a))
-        s = b[2:]
-    answer = [Round,zero_count]
-    return answer
+  
 
 
 
