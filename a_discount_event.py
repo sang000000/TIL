@@ -1,51 +1,52 @@
 def solution(want, number, discount):
     answer = 0  # 원하는 상품을 모두 할인 받을 수 있는 경우의 수
     discounted_items_count = 0  # 할인 품목에 포함된 원하는 상품 종류 수 카운트
-    
+
     # 할인 기간의 시작 인덱스를 설정
     for i in range(len(discount) - sum(number) + 1):
         for j in want:  # 원하는 상품 리스트를 순회
             # 현재 할인 기간에서 원하는 상품의 수가 충분한지 확인
-            if discount[i:i+10].count(j) < number[want.index(j)]:
+            if discount[i : i + 10].count(j) < number[want.index(j)]:
                 break  # 부족하면 다음 시작 인덱스로 이동
             discounted_items_count += 1  # 충분하면 할인 품목 카운트 증가
-        
+
         # 모든 원하는 상품이 할인 품목에 포함되었으면 경우의 수 증가
         if discounted_items_count == len(want):
             answer += 1
-            
+
         discounted_items_count = 0  # 다음 시작 인덱스를 위해 카운트 초기화
-                            
+
     return answer  # 최종 경우의 수 반환
 
-#1) 문제 설명
 
-'''XYZ 마트는 일정한 금액을 지불하면 10일 동안 회원 자격을 부여한다. XYZ 마트에서는 회원을 대상으로 매일 한 가지 제품을 할인하는 행사를 한다. 할인하는 제품은 하루에 하나씩만 구매할 수 있다. 알뜰한 정현이는 자신이 원하는 제품과 수량이 할인하는 날짜와 10일 연속으로 일치할 경우에 맞춰서 회원가입을 하려 한다.
+# 1) 문제 설명
+
+"""XYZ 마트는 일정한 금액을 지불하면 10일 동안 회원 자격을 부여한다. XYZ 마트에서는 회원을 대상으로 매일 한 가지 제품을 할인하는 행사를 한다. 할인하는 제품은 하루에 하나씩만 구매할 수 있다. 알뜰한 정현이는 자신이 원하는 제품과 수량이 할인하는 날짜와 10일 연속으로 일치할 경우에 맞춰서 회원가입을 하려 한다.
 예를 들어, 정현이가 원하는 제품이 바나나 3개, 사과 2개, 쌀 2개, 돼지고기 2개, 냄비 1개이며, XYZ 마트에서 14일간 회원을 대상으로 할인하는 제품이 날짜 순서대로 치킨, 사과, 사과, 바나나, 쌀, 사과, 돼지고기, 바나나, 돼지고기, 쌀, 냄비, 바나나, 사과, 바나나인 경우에 대해 알아보자. 첫째 날부터 열흘 간에는 냄비가 할인하지 않기 때문에 첫째 날에는 회원가입을 하지 않는다. 둘째 날부터 열흘 간에는 바나나를 원하는 만큼 할인구매할 수 없기 때문에 둘째 날에도 회원가입을 하지 않는다. 셋째 날, 넷째 날, 다섯째 날부터 각각 열흘은 원하는 제품과 수량이 일치하기 때문에 셋 중 하루에 회원가입을 하려 한다.
 정현이가 원하는 제품을 나타내는 문자열 배열 want와 정현이가 원하는 제품의 수량을 나타내는 정수 배열 number, XYZ 마트에서 할인하는 제품을 나타내는 문자열 배열 discount가 주어졌을 때, 회원등록시 정현이가 원하는 제품을 모두 할인 받을 수 있는 회원등록 날짜의 총 일수를 반환하는 solution 함수를 완성해라. 가능한 날이 없으면 0을 반환한다.
-'''
-#2) 제한 사항
+"""
+# 2) 제한 사항
 
-'''1 ≤ want의 길이 = number의 길이 ≤ 10
+"""1 ≤ want의 길이 = number의 길이 ≤ 10
 1 ≤ number의 원소 ≤ 10
 number[i]는 want[i]의 수량을 의미하며, number의 원소의 합은 10이다.
 10 ≤ discount의 길이 ≤ 100,000
 want와 discount의 원소들은 알파벳 소문자로 이루어진 문자열이다.
-1 ≤ want의 원소의 길이, discount의 원소의 길이 ≤ 12'''
+1 ≤ want의 원소의 길이, discount의 원소의 길이 ≤ 12"""
 
 
-#3) 입출력 예시 
+# 3) 입출력 예시
 
 
-'''입출력 예 #1
+"""입출력 예 #1
 
 
 
-wnat가 ["apple"]이고 number가 [10]이고 discount가 ["banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana"]이면, 0을 반환한다.'''
+wnat가 ["apple"]이고 number가 [10]이고 discount가 ["banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana"]이면, 0을 반환한다."""
 
-#4) 코드 설명
+# 4) 코드 설명
 
-'''solution 함수에서 want, number, discount의 값을 입력 받는다.
+"""solution 함수에서 want, number, discount의 값을 입력 받는다.
  원하는 상품을 모두 할인 받을 수 있는 경우의 수를 구하기 위해 answer은 초기 값 0으로 설정한다.
 할인 품목에 포함된 원하는 상품 종류 수를 세기 위해 discounted_items_count는 초기 값 0으로 설정한다.
 반복문에서는 i에 0부터 discount의 길이 빼기 number 리스트의 합을 값까지 1씩 증가하면서 할당시킨다.
@@ -53,6 +54,6 @@ wnat가 ["apple"]이고 number가 [10]이고 discount가 ["banana", "banana", "b
 반복문 안에 있는 반복문 안에서는 만약 discount 리스트의 [i:i+10]범위의 값에서 j의 값의 개수가 number 리스트에 해당 요소의 값보다 작으면 원하는 상품의 개수가 할인 기간 동안 충분하지 않다는 뜻이므로 break 함수를 통해 반복문 안에 있는 반복문을 빠져나온다.
 그렇지 않다면 할인 기간 동안 원하는 상품의 개수가 충분하다는 뜻이므로 discount_items_count의 값을 1 증가 시킨다.
 반복문 안에 반복문이 끝나면 ciscounted_items_count의 값과 want의 길이 값과 같은지 비교해서 같다면, 모든 상품을 할인 기간안에 구매할 수 있다는 뜻이므로 answer의 값을 1 증가 시킨다.
-모든 반복문이 끝나면 answer의 값을 반환한다.'''
+모든 반복문이 끝나면 answer의 값을 반환한다."""
 
-#문제 출처 : 프로그래머스
+# 문제 출처 : 프로그래머스
